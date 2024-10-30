@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    let playerScore = 0;
+    let computerScore = 0;
+    let computerChoice = getComputerChoice();
+
+    for (let i = 0; i<5; i++)
+    {
+        playerChoice = getPlayerInput();
+        computerChoice = getComputerChoice();
+        playRound(playerChoice, computerChoice);
+    }
+
+    if(playerScore > computerScore) 
+        console.log("Player wins the game");
+    if(playerScore < computerScore) 
+        console.log("Computer wins the game");
+    else 
+        console.log("Game is a draw");
+
+    function getComputerChoice()
+    {
+        const computerChoice = Math.floor(Math.random() * 3);
+        if(computerChoice === 0) return "rock";
+        if(computerChoice === 1) return "scissors";
+        if(computerChoice === 2) return "paper";           
+    }
+    function printScore()
+    {
+        console.log("Player score: " + playerScore);
+        console.log("Computer score: " +computerScore);
+    }
+
+    function getPlayerInput()
+    {
+        let playerChoice = prompt("Please choose rock/paper/scissors");
+        while(true)
+        {
+            if (playerChoice == "rock" || playerChoice == "scissors" || playerChoice == "paper") return playerChoice;
+            else 
+            {
+                playerChoice = prompt("Please try again");
+            }
+        }
+    }
+
+    function playRound(playerChoice, computerChoice)
+    {
+        if(playerChoice == "rock" && computerChoice == "scissors" || playerScore == "paper" && computerScore == "rock" || playerScore == "scissors" && computerScore == "paper")
+        {
+            console.log("player wins round!");
+            playerScore++;
+            printScore();
+        }
+        else if (playerChoice == computerChoice)
+        {
+            console.log("Round is a draw");
+        }
+        else 
+        {
+            console.log("computer wins round!");
+            computerScore++;
+            printScore();        
+        }
+    }
+
+    
+    </script>
+</body>
+</html>
