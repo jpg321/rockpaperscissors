@@ -12,6 +12,7 @@
         <li>Rock beats scissors</li>
         <li>Scissors beats paper</li>
         <li>Paper beats rock</li>
+        <li>Score 5 points to win the game</li>
     </ul>
     <div style="font-weight: bold;">Choose:</div>
     <div class="buttons" style="padding-top: 10px;">
@@ -79,7 +80,6 @@
     })
 
   
-
     function displayChoice(){
         displayPlayerChoice.innerText = `Player Chose: ${playerChoice}`;
         displayComputerChoice.innerText = `Computer Chose: ${computerChoice}`;
@@ -104,25 +104,30 @@
     {
         if (playerScore >=5 )
         {
-            resetGame();
+            roundWinner.setAttribute("style","font-weight: bold; padding-top: 10px;");
             roundWinner.innerText = "Player wins the game!"
+            setTimeout(resetGame, 5000);
+
         }
         else if (computerScore >= 5)
         {
-            resetGame();
+            roundWinner.setAttribute("style","font-weight: bold; padding-top: 10px;");
             roundWinner.innerText = "Computer wins the game!"
+            setTimeout(resetGame, 1000);
         }
         else return;
 
     }
 
     function resetGame(){
+        roundWinner.setAttribute("style","font-weight: normal;");
             playerChoice = '';
             playerScore = '';
             playerScore = 0;
             computerScore = 0;
             displayPlayerChoice.innerText = `Player Chose: `;
             displayComputerChoice.innerText = `Computer Chose: `;
+            roundWinner.innerText = " ";
             document.querySelector("#player-score").innerText = `Player Score: `;
             document.querySelector("#computer-score").innerText = `Computer Score: `;
     }
@@ -131,16 +136,19 @@
         if(playerChoice == "rock" && computerChoice == "scissors" || playerChoice == "paper" && computerChoice == "rock" || playerChoice == "scissors" && computerChoice == "paper")
         {
             playerScore++;
+            roundWinner.setAttribute("style", "padding-top: 10px;");
             roundWinner.innerText = "Player wins the round!"
             printScore();
         }
         else if (playerChoice == computerChoice)
-        {
-            roundWinner.innerText = "Player wins the round!"
+        { 
+            roundWinner.setAttribute("style", "padding-top: 10px;");  
+            roundWinner.innerText = "Round is a draw!"
         }
         else 
         {
             computerScore++;
+            roundWinner.setAttribute("style", "padding-top: 10px;");
             roundWinner.innerText = "Computer wins the round!"
             printScore();        
         }
